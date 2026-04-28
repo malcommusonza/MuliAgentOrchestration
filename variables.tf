@@ -38,11 +38,6 @@ variable "availability_zones" {
   default     = ["us-east-1a", "us-east-1b"]
 }
 
-variable "enable_nat_gateway" {
-  description = "Create NAT Gateway"
-  type        = bool
-  default     = true
-}
 
 variable "instance_type" {
   description = "EC2 instance type"
