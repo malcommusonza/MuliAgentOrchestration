@@ -1,17 +1,4 @@
 # -----------------------------------------------------------------------------
-# TERRAFORM CLOUD
-# -----------------------------------------------------------------------------
-variable "tfc_organization" {
-  description = "Terraform Cloud organization name"
-  type        = string
-}
-
-variable "tfc_workspace" {
-  description = "Terraform Cloud workspace name"
-  type        = string
-}
-
-# -----------------------------------------------------------------------------
 # AWS
 # -----------------------------------------------------------------------------
 variable "aws_region" {
@@ -38,11 +25,22 @@ variable "availability_zones" {
   default     = ["us-east-1a", "us-east-1b"]
 }
 
+variable "enable_nat_gateway" {
+  description = "Create NAT Gateway"
+  type        = bool
+  default     = false
+}
 
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
   default     = "t3.medium"
+}
+
+variable "key_pair_name" {
+  description = "Name of EC2 key pair for SSH access (leave empty to disable SSH key)"
+  type        = string
+  default     = ""
 }
 
 variable "gateway_port" {
@@ -91,18 +89,6 @@ variable "openclaw_image" {
   description = "OpenClaw Docker image"
   type        = string
   default     = "ghcr.io/phioranex/openclaw-docker:latest"
-}
-
-# -----------------------------------------------------------------------------
-# TAGS
-# -----------------------------------------------------------------------------
-variable "global_tags" {
-  description = "Tags applied to all resources"
-  type        = map(string)
-  default = {
-    Project   = "OpenClaw-Native-MultiAgent"
-    ManagedBy = "Terraform"
-  }
 }
 
 # -----------------------------------------------------------------------------

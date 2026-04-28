@@ -5,10 +5,7 @@ data "cloudinit_config" "user_data" {
   part {
     content_type = "text/x-shellscript"
     content = templatefile("${path.module}/templates/user_data.sh.tpl", {
-      gateway_port       = var.gateway_port
-      default_model      = var.default_model
-      openclaw_image     = var.openclaw_image
-      openrouter_api_key = var.openrouter_api_key
+      gateway_port = var.gateway_port
     })
   }
 }
@@ -19,6 +16,7 @@ resource "aws_instance" "openclaw" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = [var.security_group_id]
   iam_instance_profile   = var.instance_profile_name
+  key_name               = var.key_pair_name != "" ? var.key_pair_name : null
 
   user_data = data.cloudinit_config.user_data.rendered
 

@@ -23,6 +23,12 @@ variable "instance_profile_name" {
   type = string
 }
 
+variable "key_pair_name" {
+  type        = string
+  description = "Name of the EC2 key pair to associate with the instance for SSH access"
+  default     = ""
+}
+
 variable "gateway_port" {
   type    = number
   default = 18789
@@ -30,7 +36,7 @@ variable "gateway_port" {
 
 variable "root_volume_size" {
   type    = number
-  default = 30
+  default = 24
 }
 
 variable "openclaw_image" {

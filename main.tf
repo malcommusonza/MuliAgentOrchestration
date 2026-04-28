@@ -9,11 +9,11 @@ terraform {
   }
 
   cloud {
-    organization = var.tfc_organization
+    organization = "MalcomTMusonza"
     hostname     = "app.terraform.io"
 
     workspaces {
-      name = var.tfc_workspace
+      name = "MultiAgentOrchestrationV2"
     }
   }
 }
@@ -42,6 +42,7 @@ module "network" {
   environment         = var.environment
   vpc_cidr            = var.vpc_cidr
   availability_zones  = var.availability_zones
+  enable_nat_gateway  = var.enable_nat_gateway
   tags                = var.global_tags
 }
 
@@ -66,6 +67,7 @@ module "openclaw" {
   subnet_id             = module.network.public_subnet_ids[0]
   security_group_id     = module.security.instance_security_group_id
   instance_profile_name = module.security.instance_profile_name
+  key_pair_name          = var.key_pair_name
   gateway_port          = var.gateway_port
   openrouter_api_key    = var.openrouter_api_key
   default_model         = var.default_model
